@@ -1,8 +1,10 @@
 ![Rover Logo Clear](https://github.com/Booleans/rover-analytics-assessment/blob/master/img/logo_clear.png)
 
-# Rover.com Data Science Take-Home Assignment
+# Rover.com Data Science Assessment
 
-I use this an an example for my data science students so that they are exposed to a real take-home assessment before their job search begins. To ensure proper formatting and for the interactive charts to work properly I recommend viewing my solution through the [nbviewer link](https://nbviewer.jupyter.org/github/Booleans/rover-analytics-assessment/blob/master/analysis.ipynb) instead of GitHub.
+I use this an an example for my data science students so that they are exposed to a real take-home assessment before their job search begins. 
+
+#### [View My Solution](https://nbviewer.jupyter.org/github/Booleans/rover-analytics-assessment/blob/master/analysis.ipynb) 
 
 ## Scenario
 
