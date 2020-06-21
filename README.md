@@ -1,3 +1,5 @@
+![Rover Logo Clear](https://github.com/Booleans/rover-analytics-assessment/blob/master/img/logo_clear.png)
+
 # Rover.com Data Science Take-Home Assignment
 
 I use this an an example for my data science students so that they are exposed to a real take-home assessment before their job search begins. To ensure proper formatting and for the interactive charts to work properly I recommend viewing my solution through the [nbviewer link](https://nbviewer.jupyter.org/github/Booleans/rover-analytics-assessment/blob/master/analysis.ipynb) instead of GitHub.
@@ -100,7 +102,7 @@ would always see the old conversation flow.
 3. Do you have any reservations about the experiment design? What would you
 recommend as next steps?
 
-# VI. Search Engine Marketing
+### VI. Search Engine Marketing
 
 Search engine advertising is a huge driver of new user accounts. Users that are
 aquired through search engine marketing can be identified by looking at
@@ -119,3 +121,77 @@ changed its bidding strategy. What would have been the marketing spend in that
 case?
 4. How many additional accounts where created? What was the marginal cost per
 account for these additional accounts?
+
+## Data Available
+
+The dataset includes 6 CSV files, listed and described below.
+
+### pets_pet
+
+This table details each pet that a user has added to their profile. One owner may
+have more than one pet, but not vice versa. Many of the fields on this table are self
+explanatory but we have detailed a few below.
+
+* `description` - A short (lorem ipsum) description of the pet.
+* `plays_cats` - If 1, then this pet plays well with cats.
+* `plays_children` - If 1, then this pet plays well with children.
+* `plays_dogs` - If 1, then this pet plays well with dogs.
+* `spayed_neutered` - If 1, then this pet has been spayed or neutered.
+* `house_trained` - If 1, then this pet is house trained.
+* `owner_id` - This foreign key reports the people_person record for this petʼs owner.
+
+### services_service
+
+On our site, users may offer pet care services. This table stores a record for each
+service that is offered. Each user can offer more than one service, but not more than
+one of each type. Many of the fields on this table are self explanatory but we have
+detailed a few below.
+
+* `max_dogs` - This number is the maximum number of pets this provider would prefer to care for.
+* `fee` - When a user books with a service, we take a percentage of the booking total. This field reports the percentage.
+* `provider_id` - This foreign key reports the people_person record for this serviceʼs provider.
+* `added` - A timestamp for when this service became active.
+* `price` - The price per unit booked.
+
+### conversations_conversation
+
+An owner can book a service provider by starting a conversation with them. This
+table stores a record for each conversation started on our platform. Many of the
+fields on this table are self explanatory but we have detailed a few below.
+start_date - This is the date for which pet care will first be needed.
+end_date - This is the last date for which pet care will be needed.
+units - This is the number of units of service that the owner is interested in
+booking.
+
+* `added` - A timestamp for when this conversation was created.
+* `booking_total` - This is the dollar amount (not including the ownerʼs service fee) that this booking would cost.
+* `requester_id` - This foreign key reports the people_person record for the pet owner that is requesting pet care.
+* `service_id` - This foreign key reports the services_service record for the service that the pet owner is requesting.
+* `booked_at` - If the request is booked, this timestamp reports when that occurred.
+* `cancelled_at` - A booked request can be cancelled. In that case, this timestamp reports when that occurred.
+
+### conversations_conversation_pets
+
+Since a booking may involve many pets and many pets might have had many
+bookings, it is necessary to store this many-to-many relationship on a separate
+table. Many of the fields on this table are self explanatory but we have detailed a few
+below.
+
+* `conversation_id` - A foreign key to a booking request on the `conversations_converation` table. If this conversation involves caring for more than one pets, then this conversation_id will occur on more than one row on this table (once for each pet).
+* `pet_id` - A foreign key to a pet that will receive pet care during the corresponding conversationʼs booking.
+
+### conversations_message
+
+Each conversation consists of a series of messages. A conversation may contain
+many messages, but not vice versa. Many of the fields on this table are self
+explanatory but we have detailed a few below.
+
+* `conversation_id` - This foreign key reports the conversation in `conversations_conversation` for which this message is apart of.
+* `sender_id` - This foreign key reports the user in people_person that sent this message.
+
+### conversations_review
+
+If a booking occurs, then either participant can leave a review for the experience. This table records those reviews, which consist of a brief statement and a star rating. Many of the fields on this table are self explanatory but we have detailed a few below.
+
+* `conversation_id` - This foreign key reports the booking in conversations_conversation for which this review pertains.
+* `reviewer_id` - This foreign key reports the user in people_person that wrote this review.
